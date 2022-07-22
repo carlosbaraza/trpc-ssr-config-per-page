@@ -17,6 +17,6 @@ export const config: GetClientConfig = ({ ctx }) => {
 
   // during SSR below
   return {
-    url: "http://localhost:3001/api/trpc",
+    url: "http://localhost:3000/api/trpc",
   };
 };
