@@ -1,9 +1,9 @@
 import { CSSProperties } from "react";
 import { trpc } from "../utils/trpc/trpc";
+import { withTRPC } from "../utils/trpc/withTRPC";
 
-export default function IndexPage() {
+function SSRPage() {
   const hello = trpc.useQuery(["hello", { text: "client" }]);
-
   console.log(hello);
 
   if (!hello.data) {
@@ -18,7 +18,7 @@ export default function IndexPage() {
     <div style={styles}>
       <h1>{hello.data.greeting}</h1>
       <p>
-        Without SSR | <a href="/ssr">With SSR</a>
+        <a href="/">Without SSR</a> | With SSR
       </p>
     </div>
   );
@@ -32,3 +32,5 @@ const styles: CSSProperties = {
   alignItems: "center",
   flexDirection: "column",
 };
+
+export default withTRPC({ ssr: true }, SSRPage);

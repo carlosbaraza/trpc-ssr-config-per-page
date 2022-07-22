@@ -1,16 +1,15 @@
-import { withTRPC } from '@trpc/next';
-import { AppType } from 'next/dist/shared/lib/utils';
-import { AppRouter } from './api/trpc/[trpc]';
+import { AppType } from "next/dist/shared/lib/utils";
+import { config } from "../utils/trpc/config";
+import { TRPCProvider } from "../utils/trpc/TRPCProvider";
 
-const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+const MyApp: AppType = (props) => {
+  const { Component, pageProps } = props;
+
+  return (
+    <TRPCProvider config={config} {...props}>
+      <Component {...pageProps} />;
+    </TRPCProvider>
+  );
 };
 
-export default withTRPC<AppRouter>({
-  config({ ctx }) {
-    const url = 'http://localhost:3000/api/trpc';
-    return {
-      url,
-    };
-  },
-})(MyApp);
+export default MyApp;
