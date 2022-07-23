@@ -6,7 +6,7 @@ import {
 } from '@trpc/react';
 import type { AnyRouter, ResponseMeta } from '@trpc/server';
 import { AppPropsType, NextPageContext } from 'next/dist/shared/lib/utils';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState, useMemo } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 
 type QueryClientConfig = ConstructorParameters<typeof QueryClient>[0];
