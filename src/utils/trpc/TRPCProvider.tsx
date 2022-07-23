@@ -41,7 +41,13 @@ export function TRPCProvider<TRouter extends AnyRouter>(
         }
     )
 ) {
-  const trpc = createReactQueryHooks<TRouter, NextPageContext>();
+  // useMemo to prevent that when a rerender of this component happens,
+  // a new instance of trpc.Provider is created, causing rerender
+  // of the full tree below
+  const trpc = useMemo(
+    () => createReactQueryHooks<TRouter, NextPageContext>(),
+    []
+  );
 
   const { config: getClientConfig } = props;
 
